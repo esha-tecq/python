@@ -1,0 +1,40 @@
+pip install opencv-python
+import cv2
+import matplotlib.pyplot as plt
+cam=cv2.VideoCapture(0)
+v1,frame=cam.read()
+cv2.waitKey(10)
+cam.release()
+cv2.destroyAllWindows()
+v1
+frame
+plt.imshow(frame)
+cv2.namedWindow("Open-CV",cv2.WINDOW_NORMAL)
+webcam=cv2.VideoCapture(0)
+
+while True:
+    rect,img=webcam.read()
+    cv2.imshow("Open-CV",img)
+
+    if cv2.waitKey(10)==ord("q"):
+        break
+webcam.release()
+cv2.destroyAllWindows()
+faceDetect=cv2.CascadeClassifier("E:\haarcascade_frontalface_alt.xml")
+
+cv2.namedWindow("Face Detection",cv2.WINDOW_NORMAL)
+webcam=cv2.VideoCapture(0)
+
+while True:
+    rect,img=webcam.read()
+    faces=faceDetect.detectMultiScale(img,1.5)
+    print(len(faces))
+
+    for(x,y,w,h) in faces:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
+    cv2.imshow("Face Detection",img)
+    
+    if cv2.waitKey(10)==ord("q"):
+        break
+webcam.release()
+cv2.destroyAllWindows()
